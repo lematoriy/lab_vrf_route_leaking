@@ -1,0 +1,39 @@
+#
+set system host-name {{ host.name }}
+#
+set routing-options autonomous-system {{ host.as }}
+set routing-options router-id {{ host.router_id }}
+#
+{% for interface in interfaces %}
+set interfaces {{ interface.name }} unit {{ interface.unit }} family inet address {{ interface.ip }}/{{ interface.mask }}
+{% for family in interface.families %}
+set interfaces {{ interface.name }} unit {{ interface.unit }} family {{ family }}
+{% endfor %}
+{% endfor %}
+#
+{% for interface in interfaces %}
+{% if 'mpls' in interface.protocols %}
+set protocols mpls interface {{ interface.name }} unit {{ interface.unit }}
+{% endif %}
+{% endfor %}
+#
+{% for interface in interfaces %}
+{% if 'rsvp' in interface.protocols %}
+set protocols rsvp interface {{ interface.name }} unit {{ interface.unit }}
+{% endif %}
+{% endfor %}
+#
+{% for interface in interfaces %}
+{% if 'ldp' in interface.protocols %}
+set protocols ldp interface {{ interface.name }} unit {{ interface.unit }}
+{% endif %}
+{% endfor %}
+#
+set protocols isis level-1 disable
+set protocols isis interface lo0 unit 0 passive
+set interface lo0 unit 0 family iso address {{ host.iso_net }}
+{% for interface in interfaces %}
+{% if 'iso' in interface.families %}
+set protocols isis interface {{ interface.name }} unit {{ interface.unit }}
+{% endif %}
+{% endfor %}

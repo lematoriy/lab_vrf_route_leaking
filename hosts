@@ -1,0 +1,7 @@
+[PE]
+vMX1 inventory_name=vMX1 ansible_host=192.168.0.1
+vMX2 inventory_name=vMX1 ansible_host=192.168.0.2
+
+[PE:vars]
+ansible_connection=local
+ansible_gather_facts=no

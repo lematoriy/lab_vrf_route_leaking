@@ -1,0 +1,10 @@
+- name:  build base configuration for PE router
+  hosts: PE
+  connection: local
+  gather_facts: no
+
+  tasks:
+    - name: build the configuration
+      template:
+        src: ../templates/pe_base_config.j2
+        dest: ../configs/{{ host.name }}_base_config.conf

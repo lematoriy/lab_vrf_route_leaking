@@ -1,0 +1,38 @@
+host:
+  name: vMX1
+  iso_net: 49.0001.1111.1111.1111.00
+  as: 65000
+  router_id: 1.1.1.1
+
+interfaces:
+  - name: ge-0/0/1
+    unit: 100
+    ip: 10.1.2.1
+    mask: 24
+    families:
+      - mpls
+      - iso
+    protocols:
+      - ldp
+      - mpls
+      - rsvp
+      - ldp
+  - name: ge-0/0/0
+    unit: 100
+    ip: 10.1.10.1
+    mask: 24
+    families:
+      - mpls
+      - iso
+    protocols:
+      - mpls
+      - rsvp
+      - ldp
+  - name: lo0
+    unit: 0
+    ip: 1.1.1.1
+    mask: 32
+    families:
+        - iso
+    protocols:
+      - ldp

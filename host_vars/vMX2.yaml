@@ -1,0 +1,35 @@
+host:
+  name: vMX2
+  iso_net: 49.0001.2222.2222.2222.00
+  as: 65000
+  router_id: 2.2.2.2
+
+interfaces:
+  - name: ge-0/0/1
+    unit: 100
+    ip: 10.1.2.2
+    mask: 24
+    families:
+      - mpls
+      - iso
+    protocols:
+      - ldp
+      - mpls
+      - rsvp
+      - ldp
+  - name: ge-0/0/0
+    unit: 100
+    ip: 10.2.20.1
+    mask: 24
+    families:
+      -
+    protocols:
+      -
+  - name: lo0
+    unit: 0
+    ip: 2.2.2.2
+    mask: 32
+    families:
+        - iso
+    protocols:
+      - ldp
